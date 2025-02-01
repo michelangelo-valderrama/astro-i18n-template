@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "title": "Astro + i18n 🌮",
+    "description": "Proyecto Astro que implementa i18n"
+  },
+  "title": "Astro + i18n 🌮",
+  "about": "Este es un proyecto creado con <strong>Astro</strong> para<br />implementar <strong>internalización</strong> (i18n)."
+}

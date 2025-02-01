@@ -1,0 +1,14 @@
+---
+import Main from '@/layouts/Main.astro'
+import Root from '@/layouts/Root.astro'
+
+import { i18n } from '@/i18n'
+
+const t = i18n(Astro.currentLocale)
+---
+
+<Root>
+  <Main>
+    <h1 class="font-medium text-2xl text-center mt-24">{t[404]}</h1>
+  </Main>
+</Root>

@@ -1,0 +1,30 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+import Link from './Link.astro'
+import LocaleSelector from './locale-selector'
+import { i18n } from '@/i18n'
+
+const currentLocale = Astro.currentLocale
+const t = i18n(currentLocale)
+
+const blogUrl = getRelativeLocaleUrl(currentLocale!, '/blog')
+---
+
+<header
+  class={`
+    bg-background/40
+    backdrop-blur-lg
+    sticky
+    top-0
+    w-full
+  `}
+>
+  <nav class="max-w-xl mx-auto px-8 py-4 flex justify-between items-center">
+    <div>
+      <Link href={`/${currentLocale}/`}>{t.navigation.home}</Link>
+      <Link href={blogUrl} class="ms-4">{t.navigation.blog}</Link>
+    </div>
+    <LocaleSelector client:load url={Astro.url} />
+  </nav>
+</header>

@@ -1,0 +1,30 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+import { cn } from '@/libs/cn'
+
+interface Props extends HTMLAttributes<'a'> {}
+
+const { href, class: className, ...props } = Astro.props
+
+const { pathname } = Astro.url
+const currentPath = pathname === href || pathname.slice(0, -1) === href
+---
+
+<a
+  {href}
+  class={cn(
+    `
+      text-muted-foreground
+      hover:text-foreground
+      transition
+    `,
+    {
+      'text-foreground': currentPath
+    },
+    className
+  )}
+  {...props}
+>
+  <slot />
+</a>

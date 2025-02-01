@@ -1,0 +1,12 @@
+---
+import Header from '@/components/header/Header.astro'
+import Footer from '@/components/footer/Footer.astro'
+---
+
+<Header />
+<div class="min-h-[90dvh]">
+  <main class="max-w-xl mx-auto px-8">
+    <slot />
+  </main>
+</div>
+<Footer />

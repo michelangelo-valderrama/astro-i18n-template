@@ -1,0 +1,35 @@
+@import 'tailwindcss';
+
+@plugin "tailwindcss-animate";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-background: var(--color-zinc-950);
+  --color-foreground: var(--color-zinc-50);
+
+  --color-primary: var(--color-zinc-50);
+  --color-primary-foreground: var(--color-zinc-950);
+
+  --color-muted: var(--color-zinc-800);
+  --color-muted-foreground: var(--color-zinc-400);
+
+  --color-accent: var(--color-zinc-700);
+  --color-accent-foreground: var(--color-zinc-50);
+
+  --color-popover: var(--color-zinc-900);
+  --color-popover-foreground: var(--color-zinc-200);
+
+  --color-border: var(--color-zinc-800);
+  --color-input: var(--color-zinc-700);
+  --color-ring: var(--color-zinc-100);
+
+  --radius-lg: 0.5rem;
+  --radius-md: calc(var(--radius-lg) - 2px);
+  --radius-sm: calc(var(--radius-lg) - 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+}

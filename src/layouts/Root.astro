@@ -1,0 +1,25 @@
+---
+import SetLocale from '@/i18n/react/set-locale'
+import Alternates from '@/i18n/seo/Alternates.astro'
+import OGLocales from '@/i18n/seo/OGLocales.astro'
+
+import '@/styles/main.css'
+
+const currentLocale = Astro.currentLocale
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <Alternates />
+    <OGLocales />
+    <slot name="seo" />
+  </head>
+  <body class="bg-background text-foreground">
+    <slot />
+  </body><SetLocale {currentLocale} client:load />
+</html>

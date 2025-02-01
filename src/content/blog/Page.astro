@@ -1,0 +1,76 @@
+---
+import { getCollection } from 'astro:content'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import { SEO } from 'astro-seo'
+
+import { i18n } from '@/i18n'
+
+import { RightArrowIcon } from '@/icons'
+
+import Root from '@/layouts/Root.astro'
+import Main from '@/layouts/Main.astro'
+
+import { Button } from '@/components/ui/button'
+
+const t = i18n(Astro.currentLocale)
+
+const postsFilteredByLocale = await getCollection('blog', (post) => {
+  return post.id.split('/')[0] === Astro.currentLocale
+})
+
+const posts = postsFilteredByLocale.map((post) => {
+  const [, ...slug] = post.id.split('/')
+
+  return {
+    title: post.data.title,
+    slug: slug.join('/')
+  }
+})
+---
+
+<Root>
+  <SEO slot="seo" {...t.blog.meta} />
+  <Main>
+    <h1 class="text-4xl text-foreground font-medium pt-16 mb-12">
+      {t.blog.title}
+    </h1>
+    <article class="flex flex-col">
+      {
+        posts.map((post) => (
+          <a
+            tabindex="-1"
+            href={getRelativeLocaleUrl(
+              Astro.currentLocale!,
+              '/post/' + post.slug
+            )}
+          >
+            <Button
+              size="lg"
+              variant="outline"
+              className={`
+                w-full
+                h-auto
+                p-4
+                group
+                text-lg
+                whitespace-normal
+                justify-start
+                text-left
+              `}
+            >
+              {post.title}
+              <RightArrowIcon
+                className={`
+                  ms-auto
+                  opacity-0
+                  group-hover:opacity-100
+                  transition
+                `}
+              />
+            </Button>
+          </a>
+        ))
+      }
+    </article>
+  </Main>
+</Root>

@@ -1,0 +1,38 @@
+---
+import { i18n, replTransText } from '@/i18n'
+
+import { GitHubIcon } from '@/icons'
+import { Button } from '../ui/button'
+
+const t = i18n(Astro.currentLocale)
+---
+
+<footer class="pb-8 pt-6 border-t">
+  <div
+    class={`
+      max-w-xl
+      mx-auto
+      px-8
+      text-sm
+      text-muted-foreground
+      flex
+      items-center
+      justify-between
+    `}
+  >
+    <span
+      set:html={replTransText(t.footer.creator, {
+        name: 'Michelangelo'
+      })}
+    />
+    <a
+      href="https://github.com/michelangelo-valderrama/astro-i18n-template"
+      tabindex="-1"
+      rel="noopener noreferrer"
+    >
+      <Button size="icon" variant="ghost">
+        <GitHubIcon />
+      </Button>
+    </a>
+  </div>
+</footer>

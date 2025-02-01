@@ -1,0 +1,10 @@
+{
+  "navigation": {
+    "home": "Inicio",
+    "blog": "Blog"
+  },
+  "footer": {
+    "creator": "Creado por <strong>{{name}}</strong> en 2025"
+  },
+  "404": "404 | Página no encontrada"
+}

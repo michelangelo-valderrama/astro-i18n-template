@@ -1,0 +1,22 @@
+---
+import { SEO } from 'astro-seo'
+
+import Root from '@/layouts/Root.astro'
+import Main from '@/layouts/Main.astro'
+
+import { i18n } from '@/i18n'
+
+const t = i18n(Astro.currentLocale).home
+---
+
+<Root>
+  <SEO slot="seo" {...t.meta} />
+  <Main>
+    <header>
+      <h1 class="text-4xl text-foreground font-medium pt-16 mb-12">
+        {t.title}
+      </h1>
+    </header>
+    <p class="mb-6 leading-6" set:html={t.about} />
+  </Main>
+</Root>
