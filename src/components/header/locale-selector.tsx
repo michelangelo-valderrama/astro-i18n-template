@@ -15,6 +15,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
+import { ChevronDown } from '@/icons'
 
 interface Props {
   url: URL
@@ -31,7 +32,10 @@ export default function LocaleSelector({ url }: Props) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost">{localeNames[currentLocale]}</Button>
+        <Button variant="outline" className="ps-3 pe-4">
+          <ChevronDown className="me-1" />
+          {localeNames[currentLocale]}
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-44" align="end">
         <DropdownMenuRadioGroup value={locale} onValueChange={goTo}>

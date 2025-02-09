@@ -3,7 +3,7 @@ import type { GetStaticPaths } from 'astro'
 
 import { locales } from '@/i18n'
 
-import HomePage from '@/content/home/Page.astro'
+import HomePage from '@/components/home/Page.astro'
 
 export const getStaticPaths = (() => {
   return locales.map((locale) => ({
