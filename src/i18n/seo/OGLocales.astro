@@ -1,12 +1,12 @@
 ---
-import { localesMap } from '../config'
+import { locales } from '../config'
 
 const currentLocale = Astro.currentLocale
 ---
 
 {
-  Object.entries(localesMap).map(([locale, fullLocale]) => {
+  locales.map((locale) => {
     const property = `og:locale${locale !== currentLocale ? ':alternate' : ''}`
-    return <meta {property} content={fullLocale} />
+    return <meta {property} content={locale} />
   })
 }

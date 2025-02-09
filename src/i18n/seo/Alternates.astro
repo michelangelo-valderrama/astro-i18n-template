@@ -1,5 +1,5 @@
 ---
-import { defaultLocale, localesMap } from '../config'
+import { defaultLocale, locales } from '../config'
 import { splitUrl } from '../utils'
 
 const url = Astro.url
@@ -14,11 +14,11 @@ const { rest } = splitUrl(url)
 />
 
 {
-  Object.entries(localesMap).map(([locale, fullLocale]) => (
+  locales.map((locale) => (
     <link
       rel="alternate"
       href={`${origin}/${locale}/${rest}`}
-      hreflang={fullLocale}
+      hreflang={locale}
     />
   ))
 }

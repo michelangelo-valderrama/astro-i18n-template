@@ -15,7 +15,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
-import { ChevronDown } from '@/icons'
+import { ChevronDownIcon } from '@/icons'
 
 interface Props {
   url: URL
@@ -33,7 +33,7 @@ export default function LocaleSelector({ url }: Props) {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" className="ps-3 pe-4">
-          <ChevronDown className="me-1" />
+          <ChevronDownIcon className="me-1" />
           {localeNames[currentLocale]}
         </Button>
       </DropdownMenuTrigger>

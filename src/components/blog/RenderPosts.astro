@@ -1,0 +1,53 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+import { RightArrowIcon } from '@/icons'
+
+import { Button } from '@/components/ui/button'
+
+interface Props {
+  posts: CollectionEntry<'blog'>[]
+}
+
+const { posts } = Astro.props
+---
+
+<article class="flex flex-col">
+  {
+    posts.map((post) => {
+      const [, ...slug] = post.id.split('/')
+      const href = getRelativeLocaleUrl(Astro.currentLocale!, `/post/${slug}`)
+
+      return (
+        <a tabindex="-1" {href}>
+          <Button
+            size="lg"
+            variant="outline"
+            className={`
+            w-full
+            h-auto
+            p-4
+            group
+            whitespace-normal
+            justify-start
+            text-left
+            border-x-0
+            rounded-none
+          `}
+          >
+            {post.data.title}
+            <RightArrowIcon
+              className={`
+              ms-auto
+              opacity-0
+              group-hover:opacity-100
+              transition
+            `}
+            />
+          </Button>
+        </a>
+      )
+    })
+  }
+</article>

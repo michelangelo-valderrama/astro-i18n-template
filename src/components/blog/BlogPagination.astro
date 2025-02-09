@@ -1,0 +1,29 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import type { Page } from 'astro'
+
+import { ChevronLeftIcon, ChevronRightIcon } from '@/icons'
+
+import { Button } from '@/components/ui/button'
+
+interface Props {
+  page: Page<CollectionEntry<'blog'>>
+}
+
+const { page } = Astro.props
+---
+
+<div class="flex justify-between mt-12">
+  <a tabindex={-1} href={page.url.prev}>
+    <Button variant="outline" disabled={page.currentPage === 1}>
+      <ChevronLeftIcon />
+      Prev</Button
+    >
+  </a>
+  <a tabindex={-1} href={page.url.next}>
+    <Button variant="outline" disabled={page.currentPage === page.lastPage}>
+      Next
+      <ChevronRightIcon />
+    </Button>
+  </a>
+</div>

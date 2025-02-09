@@ -1,31 +1,23 @@
 ---
-import { getCollection } from 'astro:content'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import type { CollectionEntry } from 'astro:content'
+import type { Page } from 'astro'
 import { SEO } from 'astro-seo'
 
 import { i18n } from '@/i18n'
 
-import { RightArrowIcon } from '@/icons'
-
 import Root from '@/layouts/Root.astro'
 import Main from '@/layouts/Main.astro'
 
-import { Button } from '@/components/ui/button'
+import RenderPosts from './RenderPosts.astro'
+import BlogPagination from './BlogPagination.astro'
 
 const t = i18n(Astro.currentLocale)
 
-const postsFilteredByLocale = await getCollection('blog', (post) => {
-  return post.id.split('/')[0] === Astro.currentLocale
-})
+interface Props {
+  page: Page<CollectionEntry<'blog'>>
+}
 
-const posts = postsFilteredByLocale.map((post) => {
-  const [, ...slug] = post.id.split('/')
-
-  return {
-    title: post.data.title,
-    slug: slug.join('/')
-  }
-})
+const { page } = Astro.props
 ---
 
 <Root>
@@ -34,44 +26,9 @@ const posts = postsFilteredByLocale.map((post) => {
     <h1 class="text-4xl text-foreground font-medium pt-16 mb-12">
       {t.blog.title}
     </h1>
-    <article class="flex flex-col">
-      {
-        posts.map((post) => (
-          <a
-            tabindex="-1"
-            href={getRelativeLocaleUrl(
-              Astro.currentLocale!,
-              '/post/' + post.slug
-            )}
-          >
-            <Button
-              size="lg"
-              variant="outline"
-              className={`
-                w-full
-                h-auto
-                p-4
-                group
-                whitespace-normal
-                justify-start
-                text-left
-                border-x-0
-                rounded-none
-              `}
-            >
-              {post.title}
-              <RightArrowIcon
-                className={`
-                  ms-auto
-                  opacity-0
-                  group-hover:opacity-100
-                  transition
-                `}
-              />
-            </Button>
-          </a>
-        ))
-      }
-    </article>
+    <div class="h-full">
+      <RenderPosts posts={page.data} />
+    </div>
+    <BlogPagination {page} />
   </Main>
 </Root>

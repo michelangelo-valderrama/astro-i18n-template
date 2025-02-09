@@ -1,0 +1,40 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content'
+import type { GetStaticPaths, Page } from 'astro'
+
+import { locales } from '@/i18n'
+
+import BlogPage from '@/components/blog/Page.astro'
+
+// https://docs.astro.build/en/guides/routing/#pagination
+export const getStaticPaths = (async ({ paginate }) => {
+  const blog = await getCollection('blog')
+  let routes: any[] = []
+
+  locales.forEach((locale) => {
+    const posts = blog.filter((p) => p.id.split('/')[0] === locale)
+    /*
+      You could also sort by date
+      .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+    */
+
+    routes = [
+      ...routes,
+      ...paginate(posts, {
+        params: { locale },
+        pageSize: 1
+      })
+    ]
+  })
+
+  return routes
+}) satisfies GetStaticPaths
+
+interface Props {
+  page: Page<CollectionEntry<'blog'>>
+}
+
+const { page } = Astro.props
+---
+
+<BlogPage {page} />
