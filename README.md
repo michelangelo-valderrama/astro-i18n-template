@@ -2,32 +2,41 @@ Astro i18n template
 
 Este es un template en el que se implementa i18n en Astro.
 
+## Setup
+
+```sh
+nvm use
+
+npm i
+npm run dev
+```
+
 ## Características
 
 - Usas lo que necesitas.
 - 100% customizable.
 - Lo extiendes como prefieras.
-- Evita duplicar código[^1].
+- Evita duplicar código(1).
 - Tipado en las traducciones.
 - Adaptable a librerías de UI.
 - Un proyecto con casos reales.
 
-[^1]: Aquí hay un paréntesis. Hay que duplicar
-  ```
-  import type { GetStaticPaths } from 'astro'
+(1): Aquí hay un paréntesis. Hay que duplicar
+```
+import type { GetStaticPaths } from 'astro'
 
-  import { locales } from '@/i18n'
+import { locales } from '@/i18n'
 
-  export const getStaticPaths = (() => {
-    return locales.map((locale) => ({
-      params: { locale }
-    }))
-  }) satisfies GetStaticPaths
-  ```
+export const getStaticPaths = (() => {
+  return locales.map((locale) => ({
+    params: { locale }
+  }))
+}) satisfies GetStaticPaths
+```
 
-  en la mayoría de los componentes `src/pages/[locale]/*.astro` por las rutas dinámicas.
-  Además, si se quiere que la ruta raiz sea el idioma por defecto, hay que duplicar la páginas (pero no el contenido).
-  Aún con todo, es mejor eso que tener que duplicar todas las páginas y su contenido para cada idioma, que es aún más propenso a errores.
+en la mayoría de los componentes `src/pages/[locale]/*.astro` por las rutas dinámicas.
+Además, si se quiere que la ruta raiz sea el idioma por defecto, hay que duplicar la páginas (pero no el contenido).
+Aún con todo, es mejor eso que tener que duplicar todas las páginas y su contenido para cada idioma, que es aún más propenso a errores.
 
 ## Cómo usar
 
