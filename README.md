@@ -1,48 +1,99 @@
-# Astro Starter Kit: Basics
+Astro i18n template
 
-```sh
-npm create astro@latest -- --template basics
+Este es un template en el que se implementa i18n en Astro.
+
+## Características
+
+- Usas lo que necesitas.
+- 100% customizable.
+- Lo extiendes como prefieras.
+- Evita duplicar código[^1].
+- Tipado en las traducciones.
+- Adaptable a librerías de UI.
+- Un proyecto con casos reales.
+
+[^1]: Aquí hay un paréntesis. Hay que duplicar
+  ```
+  import type { GetStaticPaths } from 'astro'
+
+  import { locales } from '@/i18n'
+
+  export const getStaticPaths = (() => {
+    return locales.map((locale) => ({
+      params: { locale }
+    }))
+  }) satisfies GetStaticPaths
+  ```
+
+  en la mayoría de los componentes `src/pages/[locale]/*.astro` por las rutas dinámicas.
+  Además, si se quiere que la ruta raiz sea el idioma por defecto, hay que duplicar la páginas (pero no el contenido).
+  Aún con todo, es mejor eso que tener que duplicar todas las páginas y su contenido para cada idioma, que es aún más propenso a errores.
+
+## Cómo usar
+
+- Copias el directorio `src/i18n/` y lo pegas a tu proyecto.
+- Lo adaptas como lo necesites.
+
+## Ejemplos
+
+- **Página básica** en `src/pages/404.astro`.
+- **Archivos Markdown traducidos** en `src/pages/[locale]/post/[slug].astro`.
+- **Paginación con traducciones** en `src/pages/[locale]/blog/[...page].astro`.
+
+## Estructura de este proyecto
+
+```
+📂 blog/
+  📂 en/
+    📄 hello.md
+  📂 es/
+    📄 hello.md
+📂 src/
+  📁 components/
+  📂 i18n/
+    📂 react/
+      📄 set-locale.tsx
+      📄 use-i18n.ts
+      📄 index.ts
+    📂 seo/
+      📄 AlternateLinks.astro
+      📄 OGLocales.astro
+      📄 index.ts
+    📂 store/
+      📄 current-locale.ts
+    📂 translations/
+      📂 en/
+        📄 common.json
+        📄 home.json
+        📄 index.ts
+      📂 es/
+        📄 common.json
+        📄 home.json
+        📄 index.ts
+      📄 index.ts
+    📄 config.ts
+    📄 index.ts
+    📄 types.ts
+    📄 utils.ts
+  📁 layouts/
+  📁 libs/
+  📁 pages/
+  📁 styles/
+  📄 content.config.ts
+  📄 icons.tsx
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+---
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- `blog/` - Directorio donde se encuentran los archivos Markdown del blog. Dentro de este directorio, los artículos se agrupan por su idioma. Todos tienen que tener el mismo id (el nombre del archivo).
+- `src/i18n/` - Directorio donde se concentra todo lo relacionado a i18n.
+  - `react/` - Los componentes y hooks necesarios para usar i18n en React.
+  - `seo/` - Componentes relacionados al SEO.
+  - `store/` - Archivos que interactuan con la store (NanoStores, por ser agnóstico) para llevar el registro del idioma actual en el lado del cliente y en los componentes de UI de librerías externas (React, Vue, etc...).
+  - `translations/` - Las traducciones en archivos JSON agrupadas por su idioma.
+  - `config.ts` - Lo que mayormente se debe editar para adaptar este template.
+  - `index.ts` - Archivo de barril.
+  - `types.ts` - Tipos de i18n.
+  - `utils.ts` - Utilidades de i18n.
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+##
