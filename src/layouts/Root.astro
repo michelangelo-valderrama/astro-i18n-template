@@ -1,7 +1,6 @@
 ---
-import SetLocale from '@/i18n/react/set-locale'
-import Alternates from '@/i18n/seo/Alternates.astro'
-import OGLocales from '@/i18n/seo/OGLocales.astro'
+import { SetLocale } from '@/i18n/react'
+import { AlternateLinks, OGLocales } from '@/i18n/seo'
 
 import '@/styles/main.css'
 
@@ -15,7 +14,7 @@ const currentLocale = Astro.currentLocale
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <Alternates />
+    <AlternateLinks />
     <OGLocales />
     <slot name="seo" />
   </head>

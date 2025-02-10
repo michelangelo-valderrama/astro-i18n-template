@@ -1,10 +1,10 @@
 ---
 import { defaultLocale, locales } from '../config'
-import { splitUrl } from '../utils'
+import { extractLocaleFromUrl } from '../utils'
 
 const url = Astro.url
 const { origin } = url
-const { rest } = splitUrl(url)
+const [, rest] = extractLocaleFromUrl(url)
 ---
 
 <link

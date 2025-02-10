@@ -2,7 +2,7 @@
 
 import {
   defaultLocale,
-  splitUrl,
+  extractLocaleFromUrl,
   localeNames,
   verifyLocaleString
 } from '@/i18n'
@@ -22,7 +22,7 @@ interface Props {
 }
 
 export default function LocaleSelector({ url }: Props) {
-  const { locale, rest } = splitUrl(url)
+  const [locale, rest] = extractLocaleFromUrl(url)
   const currentLocale = verifyLocaleString(locale) ?? defaultLocale
 
   const goTo = (l: string) => {

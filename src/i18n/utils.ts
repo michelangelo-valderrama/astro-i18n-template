@@ -25,23 +25,36 @@ export const i18n = (locale?: Locale | string | undefined | null) => {
  * @returns Returns the text with the values replaced.
  *
  * @example
- * ```ts
- * replTransText('Hello, {{name}}!', { name: 'John' }) // Hello, John!
- * ```
+ * replTransText(
+ *  'Hello, {{name}}!',
+ *  { name: 'John' }
+ * ) // Hello, John!
  */
 export function replTransText(text: string, values: Record<string, string>) {
   return text.replace(/\{{(\w+)\}}/g, (_, key) => values[key] ?? '')
 }
 
-export function splitUrl(url: URL) {
-  const [, locale, ...slug] = url.pathname.split('/')
+/**
+ * Extracts the language from a URL (object or string).
+ * @example
+ * const url = 'https://mysite.com/en/blog/'
+ * extractLocaleFromUrl(url) // [ 'en', '/blog/' ]
+ */
+export function extractLocaleFromUrl(url: URL | string) {
+  const urlObject = url instanceof URL ? url : new URL(url)
+  const [, locale, ...slug] = urlObject.pathname.split('/')
 
-  return {
-    locale,
-    rest: slug.join('/')
-  }
+  return [locale, `/${slug.join('/')}`]
 }
 
+/**
+ * Check if the locale is supported.
+ * @returns Returns the typed locale if supported, otherwise returns `undefined`
+ *
+ * @example
+ * verifyLocaleString('es') // es
+ * verifyLocaleString('it') // undefined
+ */
 export function verifyLocaleString(
   locale: string | undefined | null
 ): Locale | undefined {

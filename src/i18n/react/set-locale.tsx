@@ -1,5 +1,4 @@
-import { currentLocaleStore } from '@/i18n/store/current-locale'
-import type { Locale } from '../types'
+import { currentLocaleStore, type Locale } from '@/i18n'
 
 interface Props {
   currentLocale?: string
